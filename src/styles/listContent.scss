@@ -1,0 +1,30 @@
+@import '_mixins';
+@import '_variables';
+
+.listContent {
+  padding: 1.5rem;
+  background-color: $color-very-light-grey;
+
+  &__searchBar {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    @include respond(phone) {
+        flex-direction: column;
+    }
+  }
+}
+
+.productCards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  @include respond(phone) {
+    flex-flow: column;
+    align-items: center;
+  }
+}
