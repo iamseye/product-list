@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import ProductCard from './productCard.js';
 import '../styles/listContent.scss';
+import ProductsData from '../products-data.js';
 
 class ListContent extends Component {
   render() {
@@ -9,7 +11,14 @@ class ListContent extends Component {
           <div> search filter </div>
         </div>
         <div className="productCards">
-          <div>products</div>
+          { ProductsData.products.map((item, i) => (
+            <ProductCard
+              key={i}
+              title={item.title}
+              type={item.type}
+              image={`https:${item.images[0].small}`}
+            />
+          ))}
         </div>
       </div>
     );

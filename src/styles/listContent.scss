@@ -20,9 +20,8 @@
 
 .productCards {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-
+  
   @include respond(phone) {
     flex-flow: column;
     align-items: center;
