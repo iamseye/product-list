@@ -1,0 +1,20 @@
+@import '_variables';
+
+.reviewContent {
+  button {
+    display: flex;
+    margin: 30px;
+  }
+}
+.reviewContent__paper {
+    padding: 5px;
+    margin: 10px 30px 10px 30px;
+
+    &--name {
+      color: $color-dark-grey;
+    }
+
+    &--rate {
+      color: $color-red;
+    }
+}

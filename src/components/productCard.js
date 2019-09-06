@@ -8,6 +8,7 @@ import '../styles/card.scss';
 const ProductCard = props => (
   <Card
     className="product-card"
+    onClick={() => props.toReview(props.id)}
   >
     <div className="product-card__image--outer">
       <CardMedia

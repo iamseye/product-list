@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import ProductCard from './productCard.js';
-import SearchBar from './searchBar.js';
-import SelectFilter from './selectFilter.js';
+import ProductCard from '../components/productCard.js';
+import SearchBar from '../components/searchBar.js';
+import SelectFilter from '../components/selectFilter.js';
 import '../styles/listContent.scss';
 import ProductsData from '../products-data.js';
+import { withRouter } from 'react-router-dom';
 
 class ListContent extends Component {
   constructor(props) {
@@ -54,6 +55,11 @@ class ListContent extends Component {
     this.setState({ filteredProducts: filteredProducts});
   }
 
+  clickCard = (id) => {
+    console.log(id);
+    this.props.history.push(`/review/${id}`);
+  }
+
   render() {
     return (
       <div className="listContent">
@@ -68,13 +74,16 @@ class ListContent extends Component {
             selectFilter={this.selectFilter}
           />
         </div>
+
         <div className="productCards">
           { this.state.filteredProducts.map((item, i) => (
             <ProductCard
               key={i}
+              id={item.id}
               title={item.title}
               type={item.type}
               image={`https:${item.images[0].small}`}
+              toReview={this.clickCard}
             />
           ))}
         </div>
@@ -83,4 +92,4 @@ class ListContent extends Component {
   }
 }
 
-export default ListContent;
+export default withRouter(ListContent);
