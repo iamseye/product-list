@@ -12,26 +12,43 @@ class ListContent extends Component {
       products: ProductsData.products,
       filteredProducts: ProductsData.products,
       searchText: '',
+      selectFilter: [],
       productsTypes: [
         'tights',
-        'basic',
+        'leggings',
         'socks'
       ]
     };
   }
 
   searchText = (text) => {
-    const { products } = this.state;
-    const filteredProducts = products.filter(item => {
-        return item.title.toLowerCase().indexOf(text.toLowerCase()) !== -1
-    });
-
-    this.setState({ filteredProducts: filteredProducts});
+    this.filterResult(text, this.state.selectFilter);
+    this.setState({ searchText: text });
   }
 
   selectFilter = (type) => {
-    const filteredProducts = this.state.products.filter(item => {
-        return type.includes(item.type.toLowerCase());
+    this.filterResult(this.state.searchText, type);
+    this.setState({ selectFilter: type });
+  }
+
+  filterResult(searchText, selectType) {
+    const { products } = this.state;
+
+    const filteredProducts = products.filter(item => {
+      if (searchText !== '' && selectType.length > 0) {
+        return (item.title.toLowerCase().indexOf(searchText.toLowerCase()) !== -1 &&
+          selectType.includes(item.type.toLowerCase())) ;
+      }
+
+      if (searchText !== '') {
+        return item.title.toLowerCase().indexOf(searchText.toLowerCase()) !== -1;
+      }
+
+      if (selectType.length > 0) {
+        return selectType.includes(item.type.toLowerCase());
+      }
+
+      return item;
     });
 
     this.setState({ filteredProducts: filteredProducts});
