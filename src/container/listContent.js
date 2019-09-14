@@ -36,27 +36,16 @@ class ListContent extends Component {
     const { products } = this.state;
 
     const filteredProducts = products.filter(item => {
-      if (searchText !== '' && selectType.length > 0) {
-        return (item.title.toLowerCase().indexOf(searchText.toLowerCase()) !== -1 &&
-          selectType.includes(item.type.toLowerCase())) ;
-      }
+      const textMatch = searchText !== '' ? item.title.toLowerCase().indexOf(searchText.toLowerCase()) !== -1 : true;
+      const selectMatch = selectType.length > 0 ? selectType.includes(item.type.toLowerCase()) : true;
 
-      if (searchText !== '') {
-        return item.title.toLowerCase().indexOf(searchText.toLowerCase()) !== -1;
-      }
-
-      if (selectType.length > 0) {
-        return selectType.includes(item.type.toLowerCase());
-      }
-
-      return item;
+      return textMatch && selectMatch;
     });
 
     this.setState({ filteredProducts: filteredProducts});
   }
 
   clickCard = (id) => {
-    console.log(id);
     this.props.history.push(`/review/${id}`);
   }
 

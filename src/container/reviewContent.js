@@ -39,7 +39,7 @@ class ReviewContent extends Component {
         { this.state.items.length === 0 ? 'Sorry... there\'s no review for this product yet' : ''}
         <div>
           {this.state.items.map((item, i) => (
-            <Paper className="reviewContent__paper">
+            <Paper key={i} className="reviewContent__paper">
               <p className="reviewContent__paper--name">{item.name}</p>
               <p className="reviewContent__paper--rate">Rating: {item.rating}</p>
               <p className="reviewContent__paper--review">
